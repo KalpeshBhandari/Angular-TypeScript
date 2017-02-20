@@ -1,0 +1,46 @@
+<h2>Add To Cart Here</h2>
+<table class="table-striped">
+    <tr>
+    	<th>No</th>            
+        <th>Item Number</th>
+        <th>Item Name</th>
+        <th>Discount Code</th>
+        <th>Unit Price</th>
+        <th>Qty</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let cartItem of cartItems; let idx = index">
+    	<td>{{idx + 1}}</td>
+        <td><input type="text" name="itemId" [(ngModel)]="cartItem.itemId" required></td>
+        <td><input type="text" name="itemName" [(ngModel)]="cartItem.itemName" required></td>
+        <td><input type="text" name="discount" [(ngModel)]="cartItem.discount" required></td>
+        <td><input type="text" name="unitPrice" [(ngModel)]="cartItem.unitPrice" required></td>
+        <td><input type="text" name="qty" [(ngModel)]="cartItem.qty" required></td>
+        <td ng-if="cartItems.length > 1">
+        	<input type="button" value="X" (click)="removeItemFromCart(idx)">
+        </td>        
+     </tr>
+    <tr>
+        <td><input type="button" value="Add" (click)="addItemToCart()"></td>
+    </tr>
+</table>
+
+<br>
+<table class="table-striped">
+    <tr>            
+        <th>Item Number</th>
+        <th>Item Name</th>
+        <th>Discount Code</th>
+        <th>Unit Price</th>
+        <th>Qty</th>
+        <th>Sub Total</th>
+    </tr>
+    <tr *ngFor="let cartItem of cartItems;">
+        <td>{{cartItem.itemId}}</td>
+        <td>{{cartItem.itemName}}</td>
+        <td>{{cartItem.discount}}</td>
+        <td>{{cartItem.unitPrice}}</td>
+        <td>{{cartItem.qty}}</td>
+        <td *ngIf="cartItem.unitPrice * cartItem.qty > 0">{{cartItem.unitPrice * cartItem.qty}}</td>
+     </tr>
+</table>
